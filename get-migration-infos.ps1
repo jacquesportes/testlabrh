@@ -1,6 +1,6 @@
 Import-Module ActiveDirectory
 
-("userPrincipalName,OPCO,Country,Enabled,Migrated,LoggedIn,Mailbox,ServerName,LitigationHoldEnabled,SingleItemRecoveryEnabled")  | Out-File -FilePath ("C:\scripts\MigrationReport\Output\MigrationReport.csv")
+("userPrincipalName,OPCO,Country,Enabled,Mailbox,ServerName,LitigationHoldEnabled,SingleItemRecoveryEnabled")  | Out-File -FilePath ("C:\scripts\MigrationReport\Output\MigrationReport.csv")
 $AllADAccounts = Get-ADUser -Filter * -SearchBase "OU=Production,DC=contoso,DC=com" -Properties UserPrincipalName,SamAccountName,physicalDeliveryOfficeName,co,Enabled,sIDHistory,lastLogonTimestamp -Server domaincontroller.contoso.com
 ForEach ($Account in $AllADAccounts){
 If ($Account.Enabled -eq $true) { $Enabled = "Yes"} Else { $Enabled = "No" }
